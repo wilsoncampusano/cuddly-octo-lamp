@@ -16,9 +16,9 @@ public class TestTemplate {
 
   @Test
   public void differentValues() {
-   Template template = new Template("Hello, ${name}");
+   Template template = new Template("Hi, ${name}");
     template.set("name", "Someone else");
-    assertEquals("Hello, Someone else", template.evaluate());
+    assertEquals("Hi, Someone else", template.evaluate());
   }
 }
 
