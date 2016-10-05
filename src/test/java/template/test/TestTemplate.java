@@ -13,5 +13,12 @@ public class TestTemplate {
     template.set("name", "Reader");
     assertEquals("Hello, Reader", template.evaluate());
   }
+
+  @Test
+  public void differentValues() {
+   Template template = new Template("Hello, ${name}");
+    template.set("name", "Someone else");
+    assertEquals("Hello, Someone else", template.evaluate());
+  }
 }
 
