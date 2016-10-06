@@ -23,6 +23,9 @@ public class Template {
        result = result.replaceAll("\\$\\{"+entry.getKey()+"\\}", entry.getValue());
     }
 
+    if(result.matches(".*\\$\\{.+\\}.*"))
+      throw new MissingValueException();
+
     return result;
   }
 }

@@ -2,9 +2,11 @@ package template.test;
 
 import org.junit.Before;
 import org.junit.Test;
+import template.MissingValueException;
 import template.Template;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class TestTemplate {
 
@@ -32,6 +34,17 @@ public class TestTemplate {
   public void unknownVariablesAreIgnored() {
     template.set("doesnotexist", "Hi");
    assertTemplateEvaluatesTo("1, 2, 3");
+  }
+
+  @Test
+  public void missingValueRaisesExceptionTest() {
+   try {
+     new Template("${one}").evaluate();
+     fail("evaluate() should throw an exception if a variable was left without a value");
+   }catch(MissingValueException expected){
+
+   }
+
   }
 }
 
