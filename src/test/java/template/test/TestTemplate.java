@@ -1,5 +1,6 @@
 package template.test;
 
+import org.junit.Before;
 import org.junit.Test;
 import template.Template;
 
@@ -7,35 +8,30 @@ import static org.junit.Assert.assertEquals;
 
 public class TestTemplate {
 
-  @Test
-  public void oneVariable() {
-    Template template = new Template("Hello, ${name}");
-    template.set("name", "Reader");
-    assertEquals("Hello, Reader", template.evaluate());
+  private void assertTemplateEvaluatesTo(String expected){
+    assertEquals(expected, template.evaluate());
   }
 
-  @Test
-  public void differentValues() {
-   Template template = new Template("Hi, ${name}");
-    template.set("name", "Someone else");
-    assertEquals("Hi, Someone else", template.evaluate());
+  private Template template;
+
+
+  @Before
+  public void setUp() {
+    template =  new Template("${one}, ${two}, ${three}");
+    template.set("one", "1");
+    template.set("two", "2");
+    template.set("three", "3");
   }
 
   @Test
   public void multipleVariables() {
-   Template template = new Template("${one}, ${two}, ${three}");
-    template.set("one", "1");
-    template.set("two", "2");
-    template.set("three", "3");
-    assertEquals("1, 2, 3", template.evaluate());
+    assertTemplateEvaluatesTo("1, 2, 3");
   }
 
   @Test
   public void unknownVariablesAreIgnored() {
-    Template template = new Template("Hello, ${name}");
-    template.set("name", "Reader");
     template.set("doesnotexist", "Hi");
-    assertEquals("Hello, Reader", template.evaluate());
+   assertTemplateEvaluatesTo("1, 2, 3");
   }
 }
 
