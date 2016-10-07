@@ -36,15 +36,9 @@ public class TestTemplate {
    assertTemplateEvaluatesTo("1, 2, 3");
   }
 
-  @Test
+  @Test(expected = MissingValueException.class)
   public void missingValueRaisesExceptionTest() {
-   try {
-     new Template("${one}").evaluate();
-     fail("evaluate() should throw an exception if a variable was left without a value");
-   }catch(MissingValueException expected){
-
-   }
-
+    new Template("${one}").evaluate();
   }
 }
 
