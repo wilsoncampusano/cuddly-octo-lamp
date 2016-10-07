@@ -18,12 +18,15 @@ public class Template {
   }
 
   public String evaluate() {
+    String result = replaceVariables();
+    checkForMissingValues(result);
+    return result;
+  }
+
+  private String replaceVariables() {
     String result = templateText;
     for(Map.Entry<String,String> entry : variablesValues.entrySet())
-       result = result.replaceAll("\\$\\{"+entry.getKey()+"\\}", entry.getValue());
-
-    checkForMissingValues(result);
-
+      result = result.replaceAll("\\$\\{"+entry.getKey()+"\\}", entry.getValue());
     return result;
   }
 
