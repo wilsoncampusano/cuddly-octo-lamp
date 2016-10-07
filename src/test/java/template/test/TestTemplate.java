@@ -46,5 +46,13 @@ public class TestTemplate {
       assertEquals("No value for ${foo}", e.getMessage());
     }
   }
+
+  @Test
+  public void variablesGetProcessedJustOnceTest() {
+    template.set("one", "${one}");
+    template.set("three", "${three}");
+    template.set("two", "${two}");
+    assertTemplateEvaluatesTo("${one}, ${three}, ${two}");
+  }
 }
 
